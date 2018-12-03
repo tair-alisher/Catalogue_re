@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -26,12 +27,28 @@ namespace Catalogue_re.BLL.Services
             return Mapper.Map<IEnumerable<EmployeeDTO>>(employees);
         }
 
+        public IEnumerable<EmployeeDTO> GetAllOrderedByName()
+        {
+            var employees = _unitOfWork.Employees.GetAll().OrderBy(e => e.FullName).ToList();
+
+            return Mapper.Map<IEnumerable<EmployeeDTO>>(employees);
+        }
+
+        public IEnumerable<EmployeeDTO> GetAllOrderedByNameWithRelations()
+        {
+            var employees = _unitOfWork.Employees.GetAll().OrderBy(e => e.FullName)
+                .Include(e => e.Department).Include(e => e.Position).ToList();
+
+                return Mapper.Map<IEnumerable<EmployeeDTO>>(employees);
+        }
+
         public EmployeeDTO Get(int? id)
         {
             if (id == null)
                 throw new ArgumentNullException();
 
-            var employee = _unitOfWork.Employees.Get(id);
+            var employee = _unitOfWork.Employees.GetAll().Where(e => e.Id == id)
+                .Include(e => e.Department).Include(e => e.Position).FirstOrDefault();
             if (employee == null)
                 throw new NotFoundException();
 

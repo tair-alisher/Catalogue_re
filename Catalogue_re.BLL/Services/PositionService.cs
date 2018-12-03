@@ -26,6 +26,13 @@ namespace Catalogue_re.BLL.Services
             return Mapper.Map<IEnumerable<PositionDTO>>(positions);
         }
 
+        public IEnumerable<PositionDTO> GetAllOrderedByName()
+        {
+            var positions = _unitOfWork.Positions.GetAll().OrderBy(p => p.Name).ToList();
+
+            return Mapper.Map<IEnumerable<PositionDTO>>(positions);
+        }
+
         public PositionDTO Get(int? id)
         {
             if (id == null)

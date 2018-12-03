@@ -6,5 +6,6 @@ namespace Catalogue_re.BLL.Interfaces
     public interface IAdministrationService : IService<AdministrationDTO>
     {
         IEnumerable<AdministrationDTO> GetAllOrderedByName();
+        IEnumerable<AdministrationDTO> GetAllOrderedByNameWithRelations();
     }
 }

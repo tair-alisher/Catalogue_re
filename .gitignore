@@ -329,6 +329,8 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-Catalogue_re.Web/Content/Images/
+Catalogue_re.Web/images/
+!Catalogue_re.Web/images/default
+!Catalogue_re.Web/images/icons
 Catalogue_re.Web/App_Data/
 # Catalogue_rery.Web/Web.config

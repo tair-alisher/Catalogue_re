@@ -1,0 +1,38 @@
+﻿@model Catalogue_re.Web.Models.ViewModels.DivisionVM
+
+@{
+    ViewBag.Title = "Просмотр административного деления";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Просмотр административного деления</h2>
+                </div>
+                <div class="content">
+                    <div>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <!-- Field DivisionName -->
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <!-- Buttons Edit and Back -->
+                    <p>
+                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Division", new {id = Model.Id})">Редактировать</a> |
+                        <a class="btn btn-default" name="backButton" id="backButton" href="@Url.Action("Index","Division")">Назад</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -33,12 +34,19 @@ namespace Catalogue_re.BLL.Services
             return Mapper.Map<IEnumerable<AdministrationDTO>>(administrations);
         }
 
+        public IEnumerable<AdministrationDTO> GetAllOrderedByNameWithRelations()
+        {
+            var administrations = _unitOfWork.Administrations.GetAll().OrderBy(a => a.Name).Include(a => a.Division).ToList();
+
+            return Mapper.Map<IEnumerable<AdministrationDTO>>(administrations);
+        }
+
         public AdministrationDTO Get(int? id)
         {
             if (id == null)
                 throw new ArgumentNullException();
-
-            var administration = _unitOfWork.Administrations.Get(id);
+            
+            var administration = _unitOfWork.Administrations.GetAll().Where(a => a.Id == id).Include(a => a.Division).FirstOrDefault();
             if (administration == null)
                 throw new NotFoundException();
 
@@ -77,7 +85,7 @@ namespace Catalogue_re.BLL.Services
 
         private bool HasRelations(int id)
         {
-            var relationsCount = _unitOfWork.Departments.Find(d => d.AdminisrationId == id).Count();
+            var relationsCount = _unitOfWork.Departments.Find(d => d.AdministrationId == id).Count();
 
             return relationsCount > 0;
         }

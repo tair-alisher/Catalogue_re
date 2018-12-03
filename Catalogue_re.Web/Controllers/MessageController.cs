@@ -9,5 +9,11 @@ namespace Catalogue_re.Web.Controllers
             ViewBag.Message = message;
             return View();
         }
+
+        public ActionResult PartialError(string message = "Ошибка")
+        {
+            ViewBag.Message = message;
+            return PartialView();
+        }
     }
 }

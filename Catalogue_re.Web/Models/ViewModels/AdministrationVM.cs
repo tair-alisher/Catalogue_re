@@ -19,7 +19,7 @@ namespace Catalogue_re.Web.Models.ViewModels
 
         [Display(Name = "Адрес")]
         [StringLength(100, ErrorMessage = "Длина строки не должна превышать 100 символов")]
-        public string Addres { get; set; }
+        public string Address { get; set; }
 
         [Display(Name = "Факс")]
         [RegularExpression(@"^[0-9 -]+$", ErrorMessage = "Ввод цифр запрещен")]

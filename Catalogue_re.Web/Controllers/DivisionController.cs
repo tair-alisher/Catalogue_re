@@ -3,6 +3,7 @@ using Catalogue_re.BLL.DTO;
 using Catalogue_re.BLL.Exceptions;
 using Catalogue_re.BLL.Interfaces;
 using Catalogue_re.Web.Models.ViewModels;
+using Catalogue_re.Web.Util;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,12 @@ namespace Catalogue_re.Web.Controllers
             }
             catch (NotFoundException)
             {
-                return HttpNotFound();
+                return RedirectToRoute(new
+                {
+                    controller = "Message",
+                    action = "Error",
+                    message = Messages.NotFound
+                });
             }
         }
 
@@ -84,7 +90,12 @@ namespace Catalogue_re.Web.Controllers
             }
             catch (NotFoundException)
             {
-                return HttpNotFound();
+                return RedirectToRoute(new
+                {
+                    controller = "Message",
+                    action = "Error",
+                    message = Messages.NotFound
+                });
             }
         }
 
@@ -107,6 +118,32 @@ namespace Catalogue_re.Web.Controllers
         {
             try
             {
+                var divisionDTO = DivisionService.Get(id);
+                var divisionVM = Mapper.Map<DivisionVM>(divisionDTO);
+
+                return PartialView(divisionVM);
+            }
+            catch (ArgumentNullException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToRoute(new
+                {
+                    controller = "Message",
+                    action = "PartialError",
+                    message = Messages.NotFound
+                });
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult Delete(int? id, DivisionVM model)
+        {
+            try
+            {
                 DivisionService.Delete(id);
                 return RedirectToAction("Index");
             }
@@ -120,7 +157,16 @@ namespace Catalogue_re.Web.Controllers
                 {
                     controller = "Message",
                     action = "Error",
-                    message = "Имеются связи. Удаление невозможно."
+                    message = Messages.HasRelations
+                });
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToRoute(new
+                {
+                    controller = "Message",
+                    action = "Error",
+                    message = Messages.NotFound
                 });
             }
         }
