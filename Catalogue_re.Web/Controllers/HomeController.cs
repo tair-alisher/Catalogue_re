@@ -25,11 +25,9 @@ namespace Catalogue_re.Web.Controllers
             var employeeDTOList = EmployeeService.GetAllOrderedByNameWithRelations().ToList();
             var employeeVMList = Mapper.Map<IEnumerable<EmployeeVM>>(employeeDTOList);
 
-            string view = "";
+            string view = "Index";
             if (User.IsInRole("manager") || User.IsInRole("administrator"))
                 view = "ManagerIndex";
-            else
-                view = "Index";
 
             return View(view, employeeVMList.ToPagedList(page ?? 1, ItemsPerPage));
         }

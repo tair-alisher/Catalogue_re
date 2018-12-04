@@ -13,6 +13,7 @@ namespace Catalogue_re.Web.Util
             Bind<IDepartmentService>().To<DepartmentService>();
             Bind<IPositionService>().To<PositionService>();
             Bind<IEmployeeService>().To<EmployeeService>();
+            Bind<ISearchService>().To<SearchService>();
         }
     }
 }

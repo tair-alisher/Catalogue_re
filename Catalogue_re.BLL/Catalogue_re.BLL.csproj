@@ -64,6 +64,7 @@
     <Compile Include="DTO\DepartmentDTO.cs" />
     <Compile Include="DTO\DivisionDTO.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />
+    <Compile Include="DTO\FilterParamsDTO.cs" />
     <Compile Include="DTO\PositionDTO.cs" />
     <Compile Include="Exceptions\HasRelationsException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Interfaces\IDivisionService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
     <Compile Include="Interfaces\IPositionService.cs" />
+    <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="MappingProfiles\BLLMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Services\DivisionService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\PositionService.cs" />
+    <Compile Include="Services\SearchService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catalogue_re.DAL\Catalogue_re.DAL.csproj">

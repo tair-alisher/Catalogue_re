@@ -186,6 +186,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -656,8 +657,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Division\Index.cshtml" />
     <Content Include="Views\Division\Details.cshtml" />
@@ -699,14 +698,8 @@
     <Content Include="Views\Search\Positions.cshtml" />
     <Content Include="Views\Division\AjaxPositionList.cshtml" />
     <Content Include="Views\Division\Delete.cshtml" />
-    <Content Include="Views\Home\AjaxDepartmentEmployees.cshtml" />
-    <Content Include="Views\Home\AjaxShowEmployee.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Home\DepartmentEmployees.cshtml" />
-    <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\ManagerIndex.cshtml" />
-    <Content Include="Views\Home\NotFound.cshtml" />
-    <Content Include="Views\Home\ShowEmployee.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Administration\AjaxPositionList.cshtml" />
     <Content Include="Views\Administration\Create.cshtml" />

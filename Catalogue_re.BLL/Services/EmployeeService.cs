@@ -8,7 +8,6 @@ using Catalogue_re.BLL.DTO;
 using Catalogue_re.BLL.Exceptions;
 using Catalogue_re.BLL.Interfaces;
 using Catalogue_re.DAL.Interfaces;
-using System.IO;
 
 namespace Catalogue_re.BLL.Services
 {
@@ -38,7 +37,8 @@ namespace Catalogue_re.BLL.Services
         public IEnumerable<EmployeeDTO> GetAllOrderedByNameWithRelations()
         {
             var employees = _unitOfWork.Employees.GetAll().OrderBy(e => e.FullName)
-                .Include(e => e.Department).Include(e => e.Position).ToList();
+                .Include(e => e.Department).Include(e => e.Position)
+                .Include(e => e.Department.Administration).ToList();
 
                 return Mapper.Map<IEnumerable<EmployeeDTO>>(employees);
         }

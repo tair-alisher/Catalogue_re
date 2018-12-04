@@ -1,8 +1,8 @@
-﻿@model PagedList.IPagedList<Catalogue.Models.Tables.Employee>
+﻿@model PagedList.IPagedList<Catalogue_re.Web.Models.ViewModels.EmployeeVM>
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Главная";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -42,44 +42,20 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label class="control-label" for="administration-select-list">Выберите орган управления (опционально)</label>
-                                <select id="administration-select-list" class="form-control" name="administrationId">
-                                    <option selected=selected value="">Орган управления</option>
-                                    @foreach (Catalogue.Models.Tables.Administration administration in ViewBag.Admins)
-                                    {
-                                        <option value="@administration.AdministrationId">@administration.AdministrationName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("AdministrationId", null, "Орган управления", htmlAttributes: new { @class = "form-control", id = "administration-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="division-select-list">Выберите регион (опционально)</label>
-                                <select id="division-select-list" class="form-control" name="divisionId">
-                                    <option selected=selected value="">Регион</option>
-                                    @foreach (Catalogue.Models.Tables.Division division in ViewBag.Divisions)
-                                    {
-                                        <option value="@division.DivisionId">@division.DivisionName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("DivisionId", null, "Регион", htmlAttributes: new { @class = "form-control", id = "division-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="department-select-list">Выберите отдел (опционально)</label>
-                                <select id="department-select-list" class="form-control" name="departmentId">
-                                    <option selected=selected value="">Отдел</option>
-                                    @foreach (Catalogue.Models.Tables.Department department in ViewBag.Departments)
-                                    {
-                                        <option value="@department.DepartmentId">@department.DepartmentName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("DepartmentId", null, "Отдел", htmlAttributes: new { @class = "form-control", id = "department-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="position-select-list">Выберите должность (опционально)</label>
-                                <select class="form-control" id="position-select-list" name="positionId">
-                                    <option selected value="">Должность</option>
-                                    @foreach (Catalogue.Models.Tables.Position position in ViewBag.Positions)
-                                    {
-                                        <option value="@position.PositionId">@position.PositionName</option>
-                                    }
-                                </select>
-                            </div>                                                
+                                @Html.DropDownList("PositionId", null, "Должность", htmlAttributes: new { @class = "form-control", id = "position-select-list" })
+                            </div>
                         </div>
                     </div><!-- /input-group -->
                 }
@@ -100,16 +76,16 @@
                                 <th style="text-align: center;">Действие</th>
                             </tr>
 
-                            @foreach (Catalogue.Models.Tables.Employee item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td class="td-title">@Html.DisplayFor(model => item.EmployeeFullName)</td>
-                                    <td class="td-title">@Html.DisplayFor(model => item.Department.DepartmentName)</td>
-                                    <td class="td-title">@Html.DisplayFor(model => item.Position.PositionName)</td>
-                                    <td class="td-title">(@Html.DisplayFor(model => item.Department.Administration.AdministrationCode)) @Html.DisplayFor(model => item.EmployeePhone)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.FullName)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.Department.Name)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.Position.Name)</td>
+                                    <td class="td-title">(@Html.DisplayFor(model => item.Department.Administration.Code)) @Html.DisplayFor(model => item.Phone)</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("EmployeeDetails","Search", new {id = item.EmployeeId})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("EmployeeDetails","Search", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
                                         </div>
                                     </td>
                                 </tr>
