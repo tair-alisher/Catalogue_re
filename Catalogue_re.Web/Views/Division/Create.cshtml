@@ -13,7 +13,7 @@
                     <h2>Добавление административного деления</h2>
                 </div>
                 <div class="content">
-                    @using (Html.BeginForm("Create", "Division", FormMethod.Post, new { enctype = "multipart/form-data", id = "create-form" }))
+                    @using (Html.BeginForm("Create", "Division", FormMethod.Post, new { id = "create-form" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-horizontal">

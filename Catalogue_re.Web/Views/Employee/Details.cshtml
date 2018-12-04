@@ -1,8 +1,8 @@
-﻿@model Catalogue.Models.Tables.Employee
+﻿@model Catalogue_re.Web.Models.ViewModels.EmployeeVM
 
 @{
     ViewBag.Title = "Просмотр сотрудника";
-    Layout = "~/Views/Shared/_AminPanel.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="container-fluid">
@@ -16,84 +16,72 @@
                     <div>
                         <hr />
                         <dl class="dl-horizontal">
-                            <!-- Field EmployeePhoto -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeePhoto)
+                                @Html.DisplayNameFor(model => model.Photo)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                <img src="~/images/@Model.EmployeePhoto" width="100" height="100" />
+                                <img src="~/images/@Model.Photo" width="100" height="100" />
                             </dd>
-                            <!-- Field DepartmentName -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.Department.DepartmentName)
+                                @Html.DisplayNameFor(model => model.Department.Name)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.Department.DepartmentName)
+                                @Html.DisplayFor(model => model.Department.Name)
                             </dd>
-                            <!-- Field PositionName -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.Position.PositionName)
+                                @Html.DisplayNameFor(model => model.Position.Name)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.Position.PositionName)
+                                @Html.DisplayFor(model => model.Position.Name)
                             </dd>
-                            <!-- Field EmployeeFullName -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeeFullName)
+                                @Html.DisplayNameFor(model => model.FullName)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeeFullName)
+                                @Html.DisplayFor(model => model.FullName)
                             </dd>
-                            <!-- Field EmployeeRoom -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeeRoom)
+                                @Html.DisplayNameFor(model => model.Room)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeeRoom)
+                                @Html.DisplayFor(model => model.Room)
                             </dd>
-                            <!-- Field EmployeeAddress -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeeAddress)
+                                @Html.DisplayNameFor(model => model.Address)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeeAddress)
+                                @Html.DisplayFor(model => model.Address)
                             </dd>
-                            <!-- Field EmployeePhone -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeePhone)
+                                @Html.DisplayNameFor(model => model.Phone)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeePhone)
+                                @Html.DisplayFor(model => model.Phone)
                             </dd>
-                            <!-- Field EmployeePersonalPhone -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeePersonalPhone)
+                                @Html.DisplayNameFor(model => model.PersonalPhone)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeePersonalPhone)
+                                @Html.DisplayFor(model => model.PersonalPhone)
                             </dd>
-                            <!-- Field EmployeeEmail -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeeEmail)
+                                @Html.DisplayNameFor(model => model.Email)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeeEmail)
+                                @Html.DisplayFor(model => model.Email)
                             </dd>
-                            <!-- Field EmployeeSkype -->
                             <dt style="width: 200px;">
-                                @Html.DisplayNameFor(model => model.EmployeeSkype)
+                                @Html.DisplayNameFor(model => model.Skype)
                             </dt>
                             <dd style="margin-left: 15%;">
-                                @Html.DisplayFor(model => model.EmployeeSkype)
+                                @Html.DisplayFor(model => model.Skype)
                             </dd>
-                            <!-- Field DateAdoption -->
                             <dt style="width: 200px;">
                                 @Html.DisplayNameFor(model => model.DateAdoption)
                             </dt>
                             <dd style="margin-left: 15%;">
                                 @Html.DisplayFor(model => model.DateAdoption)
                             </dd>
-                            <!-- Field DateDismissal -->
                             <dt style="width: 200px;">
                                 @Html.DisplayNameFor(model => model.DateDismissal)
                             </dt>
@@ -102,9 +90,8 @@
                             </dd>                          
                         </dl>
                     </div>
-                    <!-- Buttons Edit and Back -->
                     <p>
-                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = Model.EmployeeId})">Редактировать</a> |
+                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = Model.Id})">Редактировать</a> |
                         <a class="btn btn-default" name="backButton" id="backButton" href="@Url.Action("Index","Employee")">Назад</a>
                     </p>
                 </div>

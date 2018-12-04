@@ -13,7 +13,7 @@
                     <h2>Добавление административного органа управления</h2>
                 </div>
                 <div class="content">
-                   @using (Html.BeginForm("Create", "Administration", FormMethod.Post, new { enctype = "multipart/form-data", id = "create-form" }))
+                   @using (Html.BeginForm("Create", "Administration", FormMethod.Post, new { id = "create-form" }))
                    {
                     @Html.AntiForgeryToken()
 

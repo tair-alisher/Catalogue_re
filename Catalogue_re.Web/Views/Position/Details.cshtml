@@ -16,7 +16,6 @@
                     <div>
                         <hr />
                         <dl class="dl-horizontal">
-                            <!-- Field PositionName -->
                             <dt style="width:200px;">
                                 @Html.DisplayNameFor(model => model.Name)
                             </dt>
@@ -26,7 +25,6 @@
 
                         </dl>
                     </div>
-                    <!-- Buttons Edit and Back -->
                     <p>
                         <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Position", new {id = Model.Id})">Редактировать</a> |
                         <a class="btn btn-default" name="backButton" id="backButton" href="@Url.Action("Index","Position")">Назад</a>

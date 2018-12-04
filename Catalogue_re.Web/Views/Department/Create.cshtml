@@ -13,7 +13,7 @@
                     <h2>Добавление отдела</h2>
                 </div>
                 <div class="content">
-                    @using (Html.BeginForm("Create", "Department", FormMethod.Post, new { enctype = "multipart/form-data", id = "create-form" }))
+                    @using (Html.BeginForm("Create", "Department", FormMethod.Post, new { id = "create-form" }))
                     {
                         @Html.AntiForgeryToken()
 

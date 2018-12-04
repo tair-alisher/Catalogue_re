@@ -23,12 +23,20 @@ namespace Catalogue_re.Web.Controllers
             DivisionService = divisionService;
         }
 
-        public ActionResult Index(int? page)
+        public ActionResult AjaxPositionList(int? page)
         {
             var divisionDTOList = DivisionService.GetAllOrderedByName().ToList();
             var divisionVMList = Mapper.Map<IEnumerable<DivisionVM>>(divisionDTOList);
 
-            return View(divisionVMList.ToPagedList(page ?? 1, ItemsPerPage));
+            return PartialView(divisionVMList.ToPagedList(page ?? 1, ItemsPerPage));
+        }
+
+        public ActionResult Index()
+        {
+            var divisionDTOList = DivisionService.GetAllOrderedByName().ToList();
+            var divisionVMList = Mapper.Map<IEnumerable<DivisionVM>>(divisionDTOList);
+
+            return View(divisionVMList.ToPagedList(1, ItemsPerPage));
         }
 
         public ActionResult Details(int? id)
@@ -140,6 +148,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int? id, DivisionVM model)
         {
             try

@@ -74,5 +74,18 @@ namespace Catalogue_re.Web.Controllers
 
             return $"{date}.{extension}";
         }
+
+        public string UpdateImage(string oldImage, HttpPostedFileBase image)
+        {
+            RemoveImage(oldImage);
+            return UploadImage(image);
+        }
+
+        public void RemoveImage(string image)
+        {
+            string imagePath = Request.MapPath("~/images/" + image);
+            if (System.IO.File.Exists(imagePath) && image != "default-avatar.png")
+                System.IO.File.Delete(imagePath);
+        }
     }
 }

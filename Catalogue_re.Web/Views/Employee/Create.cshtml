@@ -1,8 +1,8 @@
-﻿@model Catalogue.Models.Tables.Employee
+﻿@model Catalogue_re.Web.Models.ViewModels.EmployeeVM
 
 @{
     ViewBag.Title = "Добавление сотрудника";
-    Layout = "~/Views/Shared/_AminPanel.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div id="se-pre-con" style="display:none;"></div>
 <div class="container-fluid">
@@ -19,98 +19,86 @@
                         <div class="form-horizontal">
                             <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <!-- Field EmployeeFullName with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeeFullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeeFullName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeeFullName, "", new { @class = "text-danger validation-span" })
+                                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
-                            <!-- Field EmployeeRoom with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeeRoom, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Room, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeeRoom, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeeRoom, "", new { @class = "text-danger validation-span" })
+                                    @Html.EditorFor(model => model.Room, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Room, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
-                            <!-- Field EmployeeAddress with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeeAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeeAddress, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeeAddress, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <!-- Field EmployeePhone with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeePhone, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeePhone, "", new { @class = "text-danger validation-span" })
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
-                            <!-- Field EmployeePersonalPhone with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeePersonalPhone, htmlAttributes: new { @class = "control-label col-md-2"})
+                                @Html.LabelFor(model => model.PersonalPhone, htmlAttributes: new { @class = "control-label col-md-2"})
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeePersonalPhone, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeePersonalPhone, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.PersonalPhone, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.PersonalPhone, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <!-- Field EmployeeEmail with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeeEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeeEmail, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeeEmail, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <!-- Field EmployeeSkype with Validation -->
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EmployeeSkype, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Skype, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.EmployeeSkype, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.EmployeeSkype, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Skype, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Skype, "", new { @class = "text-danger" })
                                 </div>
-                            </div>                           
-                            <!-- Field ComboBox PositionId with Validation -->
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.PositionId, "Должность", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.PositionId, ViewBag.PositionList as SelectList, "Выберите должность...", new {@class = "list", @id = "testselectset", @required = "required" })
+                                    @Html.DropDownList("PositionId", null, "Выберите должность...", htmlAttributes: new { @class = "list", @id = "testselectset", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
-                            <!-- Field ComboBox DepartmentId with Validation -->
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DepartmentId, "Отдел", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.DepartmentId, ViewBag.DepartmentList as SelectList, "Выберите отдел...", new { @class = "list", @id = "testselectset", @required = "required" })
+                                    @Html.DropDownList("DepartmentId", null, "Выберите отдел...", htmlAttributes: new { @class = "list", @id = "testselectset", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
-                            <!-- Field DateAdoption with Validation -->
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DateAdoption, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.DateAdoption, new { htmlAttributes = new { @class = "date-picker" } })
                                 </div>
                             </div>
-                            <!-- Field DateDismissal with Validation -->
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DateDismissal, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.DateDismissal,  new { htmlAttributes = new { @class = "date-picker", @id="dateDis" } })
                                 </div>
                             </div>
-                            <!-- Image EmployeePhoto and Preview -->
                             <div class="form-group">
                                 <div class="row">
-                                    @Html.LabelFor(model => model.EmployeePhoto, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <img src="~/Content/assets/img/default-avatar.png" class="img-responsive col-md-1" style="width:110px; height:110px;" />
-                                        @Html.ValidationMessageFor(model => model.EmployeePhoto, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
                                     <div id="imgPreview" class="col-md-4" style="display:none;">
                                         <i class="fa fa-arrow-right fa-3x" style="float: left; position: inherit; margin-top: 8%; padding-right: 9%;"></i>
                                         <img class="img-responsive" id="targetImg" style="width:100px; height:100px;" />
@@ -121,10 +109,9 @@
                                     <div class="col-md-offset-2 col-md-10">
                                         <input type="file" name="productImg" id="imageBrowes" class="btn btn-default" style="display:inline-block;" accept="image/x-png,image/gif,image/jpeg"/>
                                         <input type="button" value="Сброс" id="imageBrowes" onclick="ClearPreview()" class="btn btn-default" />
-                                        @Html.ValidationMessageFor(model => model.EmployeePhoto, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <!-- Buttons Add and Clear -->
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
                                         <input type="submit" value="Добавить" class="btn btn-default" id="btn" /> |

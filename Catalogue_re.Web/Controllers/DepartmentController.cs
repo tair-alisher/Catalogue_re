@@ -25,12 +25,20 @@ namespace Catalogue_re.Web.Controllers
             AdministrationService = admService;
         }
 
-        public ActionResult Index(int? page)
+        public ActionResult AjaxPositionList(int? page)
         {
             var departmentDTOList = DepartmentService.GetAllOrderedByNameWithRelations().ToList();
             var departmentVMList = Mapper.Map<IEnumerable<DepartmentVM>>(departmentDTOList);
 
-            return View(departmentVMList.ToPagedList(page ?? 1, ItemsPerPage));
+            return PartialView("AjaxPositionList", departmentVMList.ToPagedList(page ?? 1, ItemsPerPage));
+        }
+
+        public ActionResult Index()
+        {
+            var departmentDTOList = DepartmentService.GetAllOrderedByNameWithRelations().ToList();
+            var departmentVMList = Mapper.Map<IEnumerable<DepartmentVM>>(departmentDTOList);
+
+            return View(departmentVMList.ToPagedList(1, ItemsPerPage));
         }
 
         public ActionResult Details(int? id)
@@ -151,11 +159,12 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int? id, EmployeeVM model)
         {
             try
             {
-                AdministrationService.Delete(id);
+                DepartmentService.Delete(id);
                 return RedirectToAction("Index");
             }
             catch (ArgumentNullException)
@@ -175,7 +184,7 @@ namespace Catalogue_re.Web.Controllers
             {
                 return RedirectToRoute(new
                 {
-                    cotnroller = "Message",
+                    controller = "Message",
                     action = "Error",
                     message = Messages.NotFound
                 });

@@ -80,9 +80,9 @@ function post_request() {
 function check_input(text) {
     $("#ajax-form").submit(function () {
         var input = $("#xyz-search-input").val();
-        if (input == "") {
+        if (input === "") {
             alert(text);
             return false;
         }
-    })
+    });
 }

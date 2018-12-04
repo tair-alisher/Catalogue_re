@@ -1,38 +1,30 @@
-﻿@model PagedList<Catalogue.Models.Tables.Employee>
+﻿@model PagedList<Catalogue_re.Web.Models.ViewModels.EmployeeVM>
 @using PagedList;
 @using PagedList.Mvc;
 
 <table class="table table-striped" id="listTable">
     <tr>
-        <!-- Image EmployeePhoto -->
         <th class="col-md-1">
-            @Html.DisplayNameFor(model => model.First().EmployeePhoto)
+            @Html.DisplayNameFor(model => model.First().Photo)
         </th>
-        <!-- Field DepartmentName -->
         <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.First().Department.DepartmentName)
+            @Html.DisplayNameFor(model => model.First().Department.Name)
         </th>
-        <!-- Field PositionName -->
         <th class="col-md-1">
-            @Html.DisplayNameFor(model => model.First().Position.PositionName)
+            @Html.DisplayNameFor(model => model.First().Position.Name)
         </th>
-        <!-- Field EmployeeFullName -->
         <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.First().EmployeeFullName)
+            @Html.DisplayNameFor(model => model.First().FullName)
         </th>
-        <!-- Field EmployeeRoom -->
         <th class="col-md-1">
-            @Html.DisplayNameFor(model => model.First().EmployeeRoom)
+            @Html.DisplayNameFor(model => model.First().Room)
         </th>
-        <!-- Field EmployeePhone -->
         <th class="col-md-1">
-            @Html.DisplayNameFor(model => model.First().EmployeePhone)
+            @Html.DisplayNameFor(model => model.First().Phone)
         </th>
-        <!-- Field DateAdoption -->
         <th class="col-md-1">
             @Html.DisplayNameFor(model => model.First().DateAdoption)
         </th>
-        <!-- Field DateDismissal -->
         <th class="col-md-1">
             @Html.DisplayNameFor(model => model.First().DateDismissal)
         </th>
@@ -42,47 +34,38 @@
     </tr>
 
 @foreach (var item in Model) {
-    var myModal = "myModal" + item.EmployeeId;
+    var myModal = "myModal" + item.Id;
     <tr>
-        <!-- Image EmployeePhoto -->
         <td>
-            <img src="~/images/@item.EmployeePhoto" width="80" height="100" />
+            <img src="~/images/@item.Photo" width="80" height="100" />
         </td>
-        <!-- Image DepartmentName -->
         <td class="td-title">
-            @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            @Html.DisplayFor(modelItem => item.Department.Name)
         </td>
-        <!-- Field PositionName -->
         <td class="td-title">
-            @Html.DisplayFor(modelItem => item.Position.PositionName)
+            @Html.DisplayFor(modelItem => item.Position.Name)
         </td>
-        <!-- Field EmployeeFullName -->
         <td class="td-title">
-            @Html.DisplayFor(modelItem => item.EmployeeFullName)
+            @Html.DisplayFor(modelItem => item.FullName)
         </td>
-        <!-- Field EmployeeRoom -->
         <td class="td-title">
-            @Html.DisplayFor(modelItem => item.EmployeeRoom)
+            @Html.DisplayFor(modelItem => item.Room)
         </td>
-        <!-- Field EmployeePhone -->
         <td class="td-title">
-            @Html.DisplayFor(modelItem => item.EmployeePhone)
+            @Html.DisplayFor(modelItem => item.Phone)
         </td>
-        <!-- Field DateAdoption -->
         <td>
             @Html.DisplayFor(modelItem => item.DateAdoption)
         </td>
-        <!-- Field DateDismissal -->
         <td>
             @Html.DisplayFor(modelItem => item.DateDismissal)
         </td>
-        <!-- Buttons Edit, Details, Delete -->
         <td>
             <div class="btn-group">
-                <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.EmployeeId})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
-                <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.EmployeeId})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
-                <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.EmployeeId})" data-toggle="modal" data-target="#@myModal"
-                   data-whatever="@item.EmployeeId"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
+                <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
+                <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.Id})" data-toggle="modal" data-target="#@myModal"
+                   data-whatever="@item.Id"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -93,7 +76,7 @@
                             <h4 class="modal-title" id="myModalLabel">Удаление</h4>
                         </div>
                         <div class="modal-body">
-                            Вы точно хотите удалить: <span><b>@item.EmployeeFullName</b></span>
+                            Вы точно хотите удалить: <span><b>@item.FullName</b></span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

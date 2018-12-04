@@ -1,10 +1,10 @@
-﻿@model PagedList<Catalogue.Models.Tables.Employee>
+﻿@model PagedList<Catalogue_re.Web.Models.ViewModels.EmployeeVM>
 @using PagedList;
 @using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Сотрудники";
-    Layout = "~/Views/Shared/_AminPanel.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div id="se-pre-con" style="display:none;"></div>
 <div class="container-fluid">
@@ -49,72 +49,45 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label class="control-label" for="administration-select-list">Выберите орган управления (опционально)</label>
-                                <select id="administration-select-list" class="form-control" name="administrationId">
-                                    <option selected=selected value="">Орган управления</option>
-                                    @foreach (Catalogue.Models.Tables.Administration administration in ViewBag.Admins)
-                                    {
-                                        <option value="@administration.AdministrationId">@administration.AdministrationName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("AdministrationId", null, "Орган управления", htmlAttributes: new { @class = "form-control", id = "administration-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="division-select-list">Выберите регион (опционально)</label>
-                                <select id="division-select-list" class="form-control" name="divisionId">
-                                    <option selected=selected value="">Регион</option>
-                                    @foreach (Catalogue.Models.Tables.Division division in ViewBag.Divisions)
-                                    {
-                                        <option value="@division.DivisionId">@division.DivisionName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("DivisionId", null, "Регион", htmlAttributes: new { @class = "form-control", id = "division-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="department-select-list">Выберите отдел (опционально)</label>
-                                <select id="department-select-list" class="form-control" name="departmentId">
-                                    <option selected value="">Отдел</option>
-                                    @foreach (Catalogue.Models.Tables.Department department in ViewBag.Departments)
-                                    {
-                                        <option value="@department.DepartmentId">@department.DepartmentName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("DepartmentId", null, "Отдел", htmlAttributes: new { @class = "form-control", id = "department-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="position-select-list">Выберите должность (опционально)</label>
-                                <select class="form-control" id="position-select-list" name="positionId">
-                                    <option selected=selected value="">Должность</option>
-                                    @foreach (Catalogue.Models.Tables.Position position in ViewBag.Positions)
-                                    {
-                                        <option value="@position.PositionId">@position.PositionName</option>
-                                    }
-                                </select>
+                                @Html.DropDownList("PositionId", null, "Должность", htmlAttributes: new { @class = "form-control", id = "position-select-list" })
                             </div>
                         </div>
-                    </div><!-- /input-group -->
+                    </div>
                 }
-
                 <hr>
-                
                 <div id="results"></div>
-
                 <div class="content" id="accordion">
                     <table class="table table-striped" id="listTable">
                         <tr>
                             <th class="col-md-1">
-                                @Html.DisplayNameFor(model => model.First().EmployeePhoto)
+                                @Html.DisplayNameFor(model => model.First().Photo)
                             </th>
                             <th class="col-md-2">
-                                @Html.DisplayNameFor(model => model.First().Department.DepartmentName)
+                                @Html.DisplayNameFor(model => model.First().Department.Name)
                             </th>
                             <th class="col-md-1">
-                                @Html.DisplayNameFor(model => model.First().Position.PositionName)
+                                @Html.DisplayNameFor(model => model.First().Position.Name)
                             </th>
                             <th class="col-md-2">
-                                @Html.DisplayNameFor(model => model.First().EmployeeFullName)
+                                @Html.DisplayNameFor(model => model.First().FullName)
                             </th>
                             <th class="col-md-1">
-                                @Html.DisplayNameFor(model => model.First().EmployeeRoom)
+                                @Html.DisplayNameFor(model => model.First().Room)
                             </th>
                             <th class="col-md-1">
-                                @Html.DisplayNameFor(model => model.First().EmployeePhone)
+                                @Html.DisplayNameFor(model => model.First().Phone)
                             </th>
                             <th class="col-md-1">
                                 @Html.DisplayNameFor(model => model.First().DateAdoption)
@@ -124,44 +97,44 @@
                             </th>      
                             <th style="text-align: center;">
                                 Действия
-                            </th>                     
+                            </th>
                         </tr>
 
                         @foreach (var item in Model)
                         {
-                            var myModal = "myModal" + item.EmployeeId;
+                            var myModal = "myModal" + item.Id;
                             <tr>
                                 <td>
-                                    <img src="~/images/@item.EmployeePhoto" width="80" height="100" />
+                                    <img src="~/images/@item.Photo" width="80" height="100" />
 
                                 </td>
                                 <td class="td-title">
-                                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                                    @Html.DisplayFor(modelItem => item.Department.Name)
                                 </td>
                                 <td class="td-title">
-                                    @Html.DisplayFor(modelItem => item.Position.PositionName)
+                                    @Html.DisplayFor(modelItem => item.Position.Name)
                                 </td>
                                 <td class="td-title">
-                                    @Html.DisplayFor(modelItem => item.EmployeeFullName)
+                                    @Html.DisplayFor(modelItem => item.FullName)
                                 </td>
                                 <td class="td-title">
-                                    @Html.DisplayFor(modelItem => item.EmployeeRoom)
+                                    @Html.DisplayFor(modelItem => item.Room)
                                 </td>
                                 <td class="td-title">
-                                    @Html.DisplayFor(modelItem => item.EmployeePhone)
+                                    @Html.DisplayFor(modelItem => item.Phone)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DateAdoption)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DateDismissal)
-                                </td>                               
+                                </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.EmployeeId})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
-                                        <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.EmployeeId})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
-                                        <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.EmployeeId})" data-toggle="modal" data-target="#@myModal"
-                                                data-whatever="@item.EmployeeId"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
+                                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
+                                        <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                                        <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.Id})" data-toggle="modal" data-target="#@myModal"
+                                                data-whatever="@item.Id"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
                                     </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -172,7 +145,7 @@
                                                     <h4 class="modal-title" id="myModalLabel">Удаление</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Вы точно хотите удалить: <span><b>@item.EmployeeFullName</b></span>
+                                                    Вы точно хотите удалить: <span><b>@item.FullName</b></span>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -184,11 +157,8 @@
                                 </td>
                             </tr>
                         }
-
                     </table>
-
-                    <div id="result"> </div>
-                   
+                    <div id="result"></div>
                     <div id="paginationToDelete">
                         @Html.PagedListPager(Model, page => Url.Action("AjaxPositionList", new { page }),
                          PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "result", OnSuccess = "removeListAndPagination()" }))

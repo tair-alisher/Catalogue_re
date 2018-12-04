@@ -11,7 +11,7 @@
             Вы точно хотите удалить:<span><b>  @Html.DisplayFor(model => model.Name)</b></span>
         </div>
     </div>
-    @using (Html.BeginForm("Delete", "Position", FormMethod.Post, new { enctype = "multipart/form-data", @class = "delete-form" }))
+    @using (Html.BeginForm("Delete", "Position", FormMethod.Post, new { @class = "delete-form" }))
     {
         @Html.AntiForgeryToken()
         <div class="modal-footer">

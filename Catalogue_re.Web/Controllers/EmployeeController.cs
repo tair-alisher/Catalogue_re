@@ -7,7 +7,6 @@ using Catalogue_re.Web.Util;
 using PagedList;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,7 +21,15 @@ namespace Catalogue_re.Web.Controllers
         public EmployeeController(IEmployeeService empService, IDepartmentService depService,
             IPositionService posService, IAdministrationService admService, IDivisionService divService) : base(empService, posService, depService, admService, divService) { }
 
-        public ActionResult Index(int? page)
+        public ActionResult AjaxPositionList(int? page)
+        {
+            var employeeDTOList = EmployeeService.GetAllOrderedByNameWithRelations().ToList();
+            var employeeVMList = Mapper.Map<IEnumerable<EmployeeVM>>(employeeDTOList);
+
+            return PartialView(employeeVMList.ToPagedList(page ?? 1, ItemsPerPage));
+        }
+
+        public ActionResult Index()
         {
             ViewBag.PositionId = GetPositionIdSelecteList();
             ViewBag.DepartmentId = GetDepartmentIdSelectList();
@@ -32,7 +39,7 @@ namespace Catalogue_re.Web.Controllers
             var employeeDTOList = EmployeeService.GetAllOrderedByNameWithRelations().ToList();
             var employeeVMList = Mapper.Map<IEnumerable<EmployeeVM>>(employeeDTOList);
 
-            return View(employeeVMList.ToPagedList(page ?? 1, ItemsPerPage));
+            return View(employeeVMList.ToPagedList(1, ItemsPerPage));
         }
 
         public ActionResult Details(int? id)
@@ -69,14 +76,14 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EmployeeVM model, HttpPostedFileBase photo)
+        public ActionResult Create(EmployeeVM model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                model.Photo = "default-avatar.png";
+                if (image != null)
+                    model.Photo = UploadImage(image);
                 var employeeDTO = Mapper.Map<EmployeeDTO>(model);
-                employeeDTO.Photo = "default-avatar.png";
-                if (photo != null)
-                    employeeDTO.Photo = UploadImage(photo);
                 EmployeeService.Add(employeeDTO);
 
                 return RedirectToAction("Index");
@@ -98,6 +105,78 @@ namespace Catalogue_re.Web.Controllers
                 ViewBag.PositionId = GetPositionIdSelecteList(employeeVM.PositionId);
 
                 return View(employeeVM);
+            }
+            catch (ArgumentNullException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToRoute(new
+                {
+                    controller = "Message",
+                    action = "Error",
+                    message = Messages.NotFound
+                });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EmployeeVM model, HttpPostedFileBase image, string oldImage)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Photo = oldImage;
+                if (image != null)
+                    model.Photo = UpdateImage(oldImage, image);
+                var employeeDTO = Mapper.Map<EmployeeDTO>(model);
+                EmployeeService.Update(employeeDTO);
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.DepartmentId = GetComplexDepartmentIdSelectList(model.DepartmentId);
+            ViewBag.PositionId = GetPositionIdSelecteList(model.PositionId);
+
+            return View(model);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                var employeeDTO = EmployeeService.Get(id);
+                var employeeVM = Mapper.Map<EmployeeVM>(employeeDTO);
+
+                return PartialView(employeeVM);
+            }
+            catch (ArgumentNullException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            catch (NotFoundException)
+            {
+                return RedirectToRoute(new
+                {
+                    controller = "Message",
+                    action = "PartialError",
+                    message = Messages.NotFound
+                });
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int? id, string image)
+        {
+            try
+            {
+                RemoveImage(image);
+                EmployeeService.Delete(id);
+
+                return RedirectToAction("Index");
             }
             catch (ArgumentNullException)
             {
