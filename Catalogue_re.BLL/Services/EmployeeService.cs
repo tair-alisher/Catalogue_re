@@ -8,6 +8,7 @@ using Catalogue_re.BLL.DTO;
 using Catalogue_re.BLL.Exceptions;
 using Catalogue_re.BLL.Interfaces;
 using Catalogue_re.DAL.Interfaces;
+using System.IO;
 
 namespace Catalogue_re.BLL.Services
 {

@@ -45,5 +45,13 @@ namespace Catalogue_re.Web.Models.ViewModels
 
         public AdministrationVM Administration { get; set; }
         public ICollection<EmployeeVM> Employees { get; set; }
+
+        public string DepartmentWithAdministration
+        {
+            get
+            {
+                return $"{Name} ({Administration.Name})";
+            }
+        }
     }
 }

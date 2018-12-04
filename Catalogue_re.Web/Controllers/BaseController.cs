@@ -1,5 +1,11 @@
-﻿using Catalogue_re.BLL.Interfaces;
+﻿using AutoMapper;
+using Catalogue_re.BLL.Interfaces;
+using Catalogue_re.Web.Models.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Catalogue_re.Web.Controllers
@@ -32,6 +38,14 @@ namespace Catalogue_re.Web.Controllers
             return new SelectList(DepartmentService.GetAllOrderedByName().ToList(), "Id", "Name", selectedId);
         }
 
+        public SelectList GetComplexDepartmentIdSelectList(int? selectedId = null)
+        {
+            var departmentDTOList = DepartmentService.GetAllOrderedByNameWithRelations().ToList();
+            var departmentVMList = Mapper.Map<IEnumerable<DepartmentVM>>(departmentDTOList).ToList();
+
+            return new SelectList(departmentVMList, "Id", "DepartmentWithAdministration", selectedId);
+        }
+
         public SelectList GetAdministrationIdSelectList(int? selectedId = null)
         {
             return new SelectList(AdministrationService.GetAllOrderedByName().ToList(), "Id", "Name", selectedId);
@@ -40,6 +54,25 @@ namespace Catalogue_re.Web.Controllers
         public SelectList GetDivisionIdSelectList(int? selectedId = null)
         {
             return new SelectList(DivisionService.GetAllOrderedByName().ToList(), "Id", "Name", selectedId);
+        }
+
+        public string UploadImage(HttpPostedFileBase photo)
+        {
+            var filename = Path.GetFileName(photo.FileName);
+            filename = GenerateUniqueName(filename);
+            string directory = Server.MapPath(Url.Content("~/images"));
+            string savePath = Path.Combine(directory, filename);
+            photo.SaveAs(savePath);
+
+            return filename;
+        }
+
+        private string GenerateUniqueName(string filePath)
+        {
+            string date = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            string extension = filePath.Split('.').Last().ToLower();
+
+            return $"{date}.{extension}";
         }
     }
 }
