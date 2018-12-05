@@ -9,6 +9,7 @@
 }
 
 function post_request_without_page() {
+    var token = $('input[name="__RequestVerificationToken"]').val();
     var name = $("#name").val();
     var positionId = $("#position-select-list").val();
     var departmentId = $("#department-select-list").val();
@@ -17,14 +18,15 @@ function post_request_without_page() {
 
     $("#loading").show();
     $.ajax({
-        url: "/crud/Search/EmployeeFilter",
+        url: "/Search/EmployeeFilter",
         type: 'POST',
         data: {
+            __RequestVerificationToken: token,
             "name": name,
-            "positionId": positionId,
-            "departmentId": departmentId,
-            "administrationId": administrationId,
-            "divisionId": divisionId
+            "PositionId": positionId,
+            "DepartmentId": departmentId,
+            "AdministrationId": administrationId,
+            "DivisionId": divisionId
         },
         cache: false,
         success: function (result) {
@@ -41,6 +43,7 @@ function post_request_without_page() {
 }
 
 function post_request() {
+    var token = $('input[name="__RequestVerificationToken"]').val();
     var name = $("#name").val();
 
     var positionId = $("#position-select-list").val();
@@ -57,12 +60,13 @@ function post_request() {
         url: url,
         type: 'POST',
         data: {
+            __RequestVerificationToken: token,
             "name": name,
             "page": page,
-            "positionId": positionId,
-            "departmentId": departmentId,
-            "administrationId": administrationId,
-            "divisionId": divisionId
+            "PositionId": positionId,
+            "DepartmentId": departmentId,
+            "AdministrationId": administrationId,
+            "DivisionId": divisionId
         },
         cache: false,
         success: function (result) {

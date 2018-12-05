@@ -20,22 +20,29 @@ namespace Catalogue_re.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EmployeeFilter()
         {
             string name = Request.QueryString["name"];
             string page = Request.QueryString["page"];
-            string positionId = Request.QueryString["positionId"];
-            string departmentId = Request.QueryString["departmentId"];
-            string administrationId = Request.QueryString["administrationId"];
-            string divisionId = Request.QueryString["divisionId"];
+            string positionId = Request.QueryString["PositionId"];
+            string departmentId = Request.QueryString["DepartmentId"];
+            string administrationId = Request.QueryString["AdministrationId"];
+            string divisionId = Request.QueryString["DivisionId"];
 
             FilterParamsDTO parameters = new FilterParamsDTO();
 
             var employeeDTOList = SearchService.GetFilteredEmployeeList(parameters).ToList();
             var employeeVMList = Mapper.Map<IEnumerable<EmployeeVM>>(employeeDTOList);
             string view = "EmployeeFilter";
+            if (User.IsInRole("admin"))
+                view = "AdminEmployeeFilter";
+            else if (User.IsInRole("manager"))
+                view = "ManagerEmployeeFilter";
 
-            return View(view, employeeVMList.ToPagedList(page == null ? 1 : int.Parse(page), ItemsPerPage));
+            return PartialView(view, employeeVMList.ToPagedList(page == null ? 1 : int.Parse(page), ItemsPerPage));
         }
+
+
     }
 }
