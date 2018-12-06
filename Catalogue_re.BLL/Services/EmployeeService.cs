@@ -38,7 +38,8 @@ namespace Catalogue_re.BLL.Services
         {
             var employees = _unitOfWork.Employees.GetAll().OrderBy(e => e.FullName)
                 .Include(e => e.Department).Include(e => e.Position)
-                .Include(e => e.Department.Administration).ToList();
+                .Include(e => e.Department.Administration)
+                .Include(e => e.Department.Administration.Division).ToList();
 
                 return Mapper.Map<IEnumerable<EmployeeDTO>>(employees);
         }

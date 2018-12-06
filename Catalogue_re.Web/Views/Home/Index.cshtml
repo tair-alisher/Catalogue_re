@@ -64,20 +64,23 @@
                         <caption>Список сотрудников</caption>
                         <tbody>
                             <tr>
-                                <th class="col-md-3">ФИО</th>
-                                <th class="col-md-3">Отдел</th>
-                                <th class="col-md-2">Должность</th>
-                                <th class="col-md-2">Телефон</th>
+                                <th>ФИО</th>
+                                <th>Территория</th>
+                                <th>Отдел</th>
+                                <th>Должность</th>
+                                <th>Телефон</th>
+                                <th>Почта</th>
                             </tr>
-
 
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td class="td-title">@Html.DisplayFor(model => item.FullName)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.Department.Administration.Division.Name)</td>
                                     <td class="td-title">@Html.DisplayFor(model => item.Department.Name)</td>
                                     <td class="td-title">@Html.DisplayFor(model => item.Position.Name)</td>
                                     <td class="td-title">(@Html.DisplayFor(model => item.Department.Administration.Code)) @Html.DisplayFor(model => item.Phone)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.Email)</td>
                                 </tr>
                             }
                         </tbody>
