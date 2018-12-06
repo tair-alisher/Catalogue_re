@@ -27,10 +27,9 @@ namespace Catalogue_re.BLL.Services
                 .Include(e => e.Department.Administration.Division);
 
             string name = string.IsNullOrEmpty(parameters.Name) ? "" : parameters.Name.Trim();
-            if (name.Length <= 0)
-                return Mapper.Map<IEnumerable<EmployeeDTO>>(employees);
+            if (!(name.Length <= 0))
+                employees = GetEmployeeListFilteredByName(employees, name);
 
-            employees = GetEmployeeListFilteredByName(employees, name);
             employees = GetEmployeeListFilteredByParams(employees, parameters);
 
             return Mapper.Map<IEnumerable<EmployeeDTO>>(employees.ToList());
@@ -80,6 +79,24 @@ namespace Catalogue_re.BLL.Services
             }
 
             return employees;
+        }
+
+        public IEnumerable<DepartmentDTO> GetFilteredDepartmentList(string value)
+        {
+            if (value.Trim().Length <= 0)
+                return Enumerable.Empty<DepartmentDTO>();
+
+            string[] words = value.ToLower().Split(' ');
+            List<Department> departments = GetFilteredDepartmentList(words).ToList();
+
+            return Mapper.Map<IEnumerable<DepartmentDTO>>(departments);
+        }
+
+        private IQueryable<Department> GetFilteredDepartmentList(string[] words)
+        {
+            return _unitOfWork.Departments.GetAll()
+                .Include(d => d.Administration)
+                .Where(d => words.All(d.Name.ToLower().Contains));
         }
     }
 

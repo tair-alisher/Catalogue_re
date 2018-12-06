@@ -6,5 +6,6 @@ namespace Catalogue_re.BLL.Interfaces
     public interface ISearchService
     {
         IEnumerable<EmployeeDTO> GetFilteredEmployeeList(FilterParamsDTO parameters);
+        IEnumerable<DepartmentDTO> GetFilteredDepartmentList(string value);
     }
 }

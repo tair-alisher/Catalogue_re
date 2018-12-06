@@ -1,4 +1,4 @@
-@model PagedList.IPagedList<Catalogue.Models.Tables.Employee>
+@model PagedList.IPagedList<Catalogue_re.Web.Models.ViewModels.EmployeeVM>
 
 @using PagedList.Mvc;
 <div class="row">
@@ -24,17 +24,17 @@
                                 <th style="text-align: center;">Действие</th>
                             </tr>
 
-                            @foreach (Catalogue.Models.Tables.Employee item in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td class="td-title">@Html.DisplayFor(model => item.EmployeeFullName)</td>
-                                    <td class="td-title">@Html.DisplayFor(model => item.Department.DepartmentName)</td>
-                                    <td class="td-title">@Html.DisplayFor(model => item.Position.PositionName)</td>
-                                    <td class="td-title">(@Html.DisplayFor(model => item.Department.Administration.AdministrationCode)) @Html.DisplayFor(model => item.EmployeePhone)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.FullName)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.Department.Name)</td>
+                                    <td class="td-title">@Html.DisplayFor(model => item.Position.Name)</td>
+                                    <td class="td-title">(@Html.DisplayFor(model => item.Department.Administration.Code)) @Html.DisplayFor(model => item.Phone)</td>
 
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("EmployeeDetails","Search", new {id = item.EmployeeId})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("EmployeeDetails","Search", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
                                         </div>
                                     </td>
                                 </tr>

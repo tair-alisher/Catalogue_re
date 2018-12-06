@@ -687,7 +687,7 @@
     <Content Include="Views\Position\Index.cshtml" />
     <Content Include="Views\Search\AdminEmployeeFilter.cshtml" />
     <Content Include="Views\Search\Administrations.cshtml" />
-    <Content Include="Views\Search\Departments.cshtml" />
+    <Content Include="Views\Search\DepartmentFilter.cshtml" />
     <Content Include="Views\Search\Divisions.cshtml" />
     <Content Include="Views\Search\EmployeeDetails.cshtml" />
     <Content Include="Views\Search\EmployeeFilter.cshtml" />

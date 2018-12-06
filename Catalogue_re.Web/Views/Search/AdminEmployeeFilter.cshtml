@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Catalogue.Models.Tables.Employee>
+﻿@model PagedList.IPagedList<Catalogue_re.Web.Models.ViewModels.EmployeeVM>
 @using PagedList.Mvc;
 <div class="row">
     <div class="col-md-12">
@@ -44,27 +44,27 @@
                                     Действия
                                 </th>
                             </tr>
-                            @foreach (Catalogue.Models.Tables.Employee item in Model)
+                            @foreach (var item in Model)
                             {
-                                var myModal = "myModal" + item.EmployeeId;
+                                var myModal = "myModal" + item.Id;
                                 <tr>
                                     <td>
-                                        <img src="~/images/@item.EmployeePhoto" width="80" height="100" />
+                                        <img src="~/images/@item.Photo" width="80" height="100" />
                                     </td>
                                     <td class="td-title">
-                                        @item.Department.DepartmentName
+                                        @item.Department.Name
                                     </td>
                                     <td class="td-title">
-                                        @item.Position.PositionName
+                                        @item.Position.Name
                                     </td>
                                     <td class="td-title">
-                                        @item.EmployeeFullName
+                                        @item.FullName
                                     </td>
                                     <td class="td-title">
-                                        @item.EmployeeRoom
+                                        @item.Room
                                     </td>
                                     <td class="td-title">
-                                        (@Html.DisplayFor(model => @item.Department.Administration.AdministrationCode)) @Html.DisplayFor(model => item.EmployeePhone)
+                                        (@Html.DisplayFor(model => @item.Department.Administration.Code)) @Html.DisplayFor(model => item.Phone)
                                     </td>
                                     <td>
                                         @item.DateAdoption
@@ -74,10 +74,10 @@
                                     </td>
                                     <td>
                                         <div class="btn-group-employee">
-                                            <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.EmployeeId})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
-                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.EmployeeId})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
-                                            <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.EmployeeId})" data-toggle="modal" data-target="#@myModal"
-                                               data-whatever="@item.EmployeeId"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
+                                            <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
+                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                                            <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.Id})" data-toggle="modal" data-target="#@myModal"
+                                               data-whatever="@item.Id"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
                                         </div>
                                         <!-- Modal -->
                                         <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -88,7 +88,7 @@
                                                         <h4 class="modal-title" id="myModalLabel">Удаление</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Вы точно хотите удалить: <span><b>@item.EmployeeFullName</b></span>
+                                                        Вы точно хотите удалить: <span><b>@item.FullName</b></span>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

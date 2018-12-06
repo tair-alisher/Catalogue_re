@@ -23,14 +23,21 @@ namespace Catalogue_re.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EmployeeFilter()
         {
-            string name = Request.QueryString["name"];
-            string page = Request.QueryString["page"];
-            string positionId = Request.QueryString["PositionId"];
-            string departmentId = Request.QueryString["DepartmentId"];
-            string administrationId = Request.QueryString["AdministrationId"];
-            string divisionId = Request.QueryString["DivisionId"];
+            string name = Request.Form["name"];
+            string page = Request.Form["page"];
+            string positionId = Request.Form["PositionId"];
+            string departmentId = Request.Form["DepartmentId"];
+            string administrationId = Request.Form["AdministrationId"];
+            string divisionId = Request.Form["DivisionId"];
 
-            FilterParamsDTO parameters = new FilterParamsDTO();
+            FilterParamsDTO parameters = new FilterParamsDTO
+            {
+                Name = name,
+                PositionId = positionId,
+                DepartmentId = departmentId,
+                AdministrationId = administrationId,
+                DivisionId = divisionId
+            };
 
             var employeeDTOList = SearchService.GetFilteredEmployeeList(parameters).ToList();
             var employeeVMList = Mapper.Map<IEnumerable<EmployeeVM>>(employeeDTOList);
@@ -43,6 +50,14 @@ namespace Catalogue_re.Web.Controllers
             return PartialView(view, employeeVMList.ToPagedList(page == null ? 1 : int.Parse(page), ItemsPerPage));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DepartmentFilter(string value)
+        {
+            var departmentDTOList = SearchService.GetFilteredDepartmentList(value).ToList();
+            var departmentVMList = Mapper.Map<IEnumerable<DepartmentVM>>(departmentDTOList);
 
+            return View(departmentVMList.ToList());
+        }
     }
 }
