@@ -81,22 +81,100 @@ namespace Catalogue_re.BLL.Services
             return employees;
         }
 
+        public IEnumerable<DivisionDTO> GetFilteredDivisionList(string value)
+        {
+            if (value.Trim().Length <= 0)
+                return Enumerable.Empty<DivisionDTO>();
+
+            List<string> words = value.Split(' ').ToList();
+            List<Division> divisions = GetFilteredDivisionList(words).ToList();
+
+            return Mapper.Map<IEnumerable<DivisionDTO>>(divisions);
+        }
+
+        private IQueryable<Division> GetFilteredDivisionList(List<string> words, IQueryable<Division> divisions = null)
+        {
+            if (words.Count() > 0)
+            {
+                string word = words.First();
+                divisions = (divisions ?? _unitOfWork.Divisions.GetAll()).Where(d => d.Name.Contains(word));
+                words.Remove(words.First());
+                return GetFilteredDivisionList(words, divisions);
+            }
+
+            return divisions;
+        }
+
+        public IEnumerable<AdministrationDTO> GetFilteredAdministrationList(string value)
+        {
+            if (value.Trim().Length <= 0)
+                return Enumerable.Empty<AdministrationDTO>();
+
+            List<string> words = value.Split(' ').ToList();
+            List<Administration> administrations = GetFilteredAdministrationList(words).ToList();
+
+            return Mapper.Map<IEnumerable<AdministrationDTO>>(administrations);
+        }
+
+        private IQueryable<Administration> GetFilteredAdministrationList(List<string> words, IQueryable<Administration> administrations = null)
+        {
+            if (words.Count() > 0)
+            {
+                string word = words.First();
+                administrations = (administrations ?? _unitOfWork.Administrations.GetAll().Include(a => a.Division)).Where(a => a.Name.Contains(word));
+                words.Remove(words.First());
+                return GetFilteredAdministrationList(words, administrations);
+            }
+
+            return administrations;
+        }
+
         public IEnumerable<DepartmentDTO> GetFilteredDepartmentList(string value)
         {
             if (value.Trim().Length <= 0)
                 return Enumerable.Empty<DepartmentDTO>();
 
-            string[] words = value.ToLower().Split(' ');
+            List<string> words = value.Split(' ').ToList();
             List<Department> departments = GetFilteredDepartmentList(words).ToList();
 
             return Mapper.Map<IEnumerable<DepartmentDTO>>(departments);
         }
 
-        private IQueryable<Department> GetFilteredDepartmentList(string[] words)
+        private IQueryable<Department> GetFilteredDepartmentList(List<string> words, IQueryable<Department> departments = null)
         {
-            return _unitOfWork.Departments.GetAll()
-                .Include(d => d.Administration)
-                .Where(d => words.All(d.Name.ToLower().Contains));
+            if (words.Count() > 0)
+            {
+                string word = words.First();
+                departments = (departments ?? _unitOfWork.Departments.GetAll().Include(d => d.Administration)).Where(d => d.Name.Contains(word));
+                words.Remove(words.First());
+                return GetFilteredDepartmentList(words, departments);
+            }
+
+            return departments;
+        }
+
+        public IEnumerable<PositionDTO> GetFilteredPositionList(string value)
+        {
+            if (value.Trim().Length <= 0)
+                return Enumerable.Empty<PositionDTO>();
+
+            List<string> words = value.Split(' ').ToList();
+            List<Position> positions = GetFilteredPositionList(words).ToList();
+
+            return Mapper.Map<IEnumerable<PositionDTO>>(positions);
+        }
+
+        private IQueryable<Position> GetFilteredPositionList(List<string> words, IQueryable<Position> positions = null)
+        {
+            if (words.Count() > 0)
+            {
+                string word = words.First();
+                positions = (positions ?? _unitOfWork.Positions.GetAll()).Where(p => p.Name.Contains(word));
+                words.Remove(words.First());
+                return GetFilteredPositionList(words, positions);
+            }
+
+            return positions;
         }
     }
 

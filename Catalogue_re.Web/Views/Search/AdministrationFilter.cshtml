@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Catalogue_re.Web.Models.ViewModels.DepartmentVM>
+﻿@model IEnumerable<Catalogue_re.Web.Models.ViewModels.AdministrationVM>
 
 @if (Model.Count() <= 0)
 {
@@ -6,34 +6,65 @@
 }
 else
 {
-    <table class="table table-striped" id="listTable">
+    <table class="table table-striped" id="listTable" style="table-layout: auto; width: 100%">
         <tr>
-            <th class="col-md-5">
-                Наименование отдела
+            <th class="col-md-2">
+                Административное деление
             </th>
-            <th class="col-md-5">
+            <th class="col-md-2">
                 Орган управления
             </th>
-            <th style="text-align:center;">
+            <th class="col-md-1">
+                Почтовый индекс
+            </th>
+            <th class="col-md-2">
+                Адрес
+            </th>
+            <th class="col-md-1">
+                Факс
+            </th>
+            <th class="col-md-1">
+                E-mail
+            </th>
+            <th class="col-md-1">
+                Skype
+            </th>
+            <th style="text-align: center;">
                 Действия
             </th>
         </tr>
+
 
         @foreach (var item in Model)
         {
             var myModal = "myModal" + item.Id;
             <tr>
                 <td class="td-title">
+                    @item.Division.Name
+                </td>
+                <td class="td-title">
                     @item.Name
                 </td>
                 <td class="td-title">
-                    @item.Administration.Name
+                    @item.Post
+                </td>
+                <td class="td-title">
+                    @item.Address
+                </td>
+                <td class="td-title">
+                    @item.Fax
+                </td>
+                <td class="td-title">
+                    @item.Email
+                </td>
+                <td class="td-title">
+                    @item.Skype
                 </td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Department", new {id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
-                        <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Department", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
-                        <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete", "Department", new { id = item.Id})" data-toggle="modal" data-target="#@myModal"
+                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Administration", new {id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
+                        <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Administration", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                        <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Administration", new {id = item.Id})" data-toggle="modal" data-target="#@myModal"
                            data-whatever="@item.Id"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
                     </div>
                     <!-- Modal -->

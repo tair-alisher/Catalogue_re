@@ -18,7 +18,7 @@
                 </div>
 
                 <hr />
-                @using (Ajax.BeginForm("AdminSearch", "Search", null,
+                @using (Ajax.BeginForm("PositionFilter", "Search", null,
                 new AjaxOptions
                 {
                     UpdateTargetId = "results",
@@ -32,7 +32,7 @@
                     <div class="header">
                         <div class="row">
                             <div class="col-md-11">
-                                <input type="text" class="form-control" id="xyz-search-input" name="title" placeholder="Введите название должности" required>
+                                <input type="text" class="form-control" id="xyz-search-input" name="value" placeholder="Введите название должности" required>
                             </div>
                             <div class="col-md-1">
                                 <span class="input-group-btn">

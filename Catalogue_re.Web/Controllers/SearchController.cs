@@ -52,12 +52,42 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult DivisionFilter(string value)
+        {
+            var divisionDTOList = SearchService.GetFilteredDivisionList(value).ToList();
+            var divisionVMList = Mapper.Map<IEnumerable<DivisionVM>>(divisionDTOList);
+
+            return PartialView(divisionVMList.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdministrationFilter(string value)
+        {
+            var administrationDTOList = SearchService.GetFilteredAdministrationList(value).ToList();
+            var administrationVMList = Mapper.Map<IEnumerable<AdministrationVM>>(administrationDTOList);
+
+            return PartialView(administrationVMList);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DepartmentFilter(string value)
         {
             var departmentDTOList = SearchService.GetFilteredDepartmentList(value).ToList();
             var departmentVMList = Mapper.Map<IEnumerable<DepartmentVM>>(departmentDTOList);
 
-            return View(departmentVMList.ToList());
+            return PartialView(departmentVMList.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PositionFilter(string value)
+        {
+            var positionDTOList = SearchService.GetFilteredPositionList(value).ToList();
+            var positionVMList = Mapper.Map<IEnumerable<PositionVM>>(positionDTOList);
+
+            return PartialView(positionVMList.ToList());
         }
     }
 }
