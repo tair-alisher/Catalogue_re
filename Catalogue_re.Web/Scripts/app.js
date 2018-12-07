@@ -5,14 +5,14 @@
 function shortSelectOptions() {
     $('#department-select-list option').each(function () {
         var option = $(this).text();
-        if (option.length > 55) {
-            $(this).text(option.substring(0, 55) + '...');
+        if (option.length > 70) {
+            $(this).text(option.substring(0, 70) + '...');
         }
     });
     $("#position-select-list option").each(function () {
         var option = $(this).text();
-        if (option.length > 55) {
-            $(this).text(option.substring(0, 55) + '...');
+        if (option.length > 70) {
+            $(this).text(option.substring(0, 70) + '...');
         }
     });
 }

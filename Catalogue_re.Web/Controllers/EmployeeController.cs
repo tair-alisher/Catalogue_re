@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Catalogue_re.Web.Controllers
 {
@@ -22,6 +23,7 @@ namespace Catalogue_re.Web.Controllers
         public EmployeeController(IEmployeeService empService, IDepartmentService depService,
             IPositionService posService, IAdministrationService admService, IDivisionService divService) : base(empService, posService, depService, admService, divService) { }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult AjaxPositionList(int? page)
         {
             var employeeDTOList = EmployeeService.GetAllOrderedByNameWithRelations().ToList();
@@ -30,6 +32,7 @@ namespace Catalogue_re.Web.Controllers
             return PartialView(employeeVMList.ToPagedList(page ?? 1, ItemsPerPage));
         }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult Index()
         {
             ViewBag.PositionId = GetPositionIdSelecteList();
@@ -43,6 +46,7 @@ namespace Catalogue_re.Web.Controllers
             return View(employeeVMList.ToPagedList(1, ItemsPerPage));
         }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult Details(int? id)
         {
             try

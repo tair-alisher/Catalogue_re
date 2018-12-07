@@ -86,7 +86,7 @@ namespace Catalogue_re.Web.Controllers
                     UserName = model.UserName,
                     Email = model.Email,
                     Password = model.Password,
-                    Role = "admin"
+                    Role = "manager"
                 };
                 OperationDetails result = await UserService.Create(userDTO);
                 if (result.Success)

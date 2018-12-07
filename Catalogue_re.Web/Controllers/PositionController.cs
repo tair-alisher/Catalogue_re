@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Catalogue_re.Web.Controllers
 {
@@ -24,6 +25,7 @@ namespace Catalogue_re.Web.Controllers
             PositionService = posService;
         }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult AjaxPositionList(int? page)
         {
             var positionDTOList = PositionService.GetAllOrderedByName().ToList();
@@ -32,6 +34,7 @@ namespace Catalogue_re.Web.Controllers
             return PartialView(positionVMList.ToPagedList(page ?? 1, ItemsPerPage));
         }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult Index()
         {
             var positionDTOList = PositionService.GetAllOrderedByName().ToList();
@@ -40,6 +43,7 @@ namespace Catalogue_re.Web.Controllers
             return View(positionVMList.ToPagedList(1, ItemsPerPage));
         }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult Details(int? id)
         {
             try

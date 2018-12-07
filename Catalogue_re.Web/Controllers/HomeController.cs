@@ -9,23 +9,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Catalogue_re.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        // TODO: CreateEmployee - Image uploading
-        // TODO: OutputCache
-        // TODO: change defaultRole to manager
         private const int ItemsPerPage = 10;
 
         public HomeController(IEmployeeService empService, IDepartmentService depService,
             IPositionService posService, IAdministrationService admService, IDivisionService divService) : base(empService, posService, depService, admService, divService) { }
 
+        [OutputCache(Duration = 30, Location = OutputCacheLocation.Downstream)]
         public ActionResult Index(int? page)
         {
             ViewBag.PositionId = GetPositionIdSelecteList();
-            ViewBag.DepartmentId = GetDepartmentIdSelectList();
+            ViewBag.DepartmentId = GetComplexDepartmentIdSelectList();
             ViewBag.AdministrationId = GetAdministrationIdSelectList();
             ViewBag.DivisionId = GetDivisionIdSelectList();
 

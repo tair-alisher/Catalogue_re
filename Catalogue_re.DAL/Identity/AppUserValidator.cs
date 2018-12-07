@@ -1,8 +1,5 @@
 ﻿using Catalogue_re.DAL.Entities;
 using Microsoft.AspNet.Identity;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Catalogue_re.DAL.Identity
 {
     public class AppUserValidator : UserValidator<ApplicationUser>
@@ -13,19 +10,5 @@ namespace Catalogue_re.DAL.Identity
             AllowOnlyAlphanumericUserNames = false;
             _userManager = manager;
         }
-
-        //public override async Task<IdentityResult> ValidateAsync(ApplicationUser user)
-        //{
-        //    IdentityResult result = await base.ValidateAsync(user);
-        //    var existingUser = await _userManager.FindByNameAsync(user.UserName);
-        //    if (existingUser != null)
-        //    {
-        //        var errors = result.Errors.ToList();
-        //        errors.Add("Пользователь с таким логином уже существует.");
-        //        result = new IdentityResult(errors);
-        //    }
-
-        //    return result;
-        //}
     }
 }

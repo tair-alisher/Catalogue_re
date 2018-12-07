@@ -71,14 +71,14 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.PositionId, "Должность", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("PositionId", null, "Выберите должность...", htmlAttributes: new { @class = "list", @id = "testselectset", @required = "required" })
+                                    @Html.DropDownListFor(model => model.PositionId, null, "Выберите должность...", htmlAttributes: new { @class = "list", @id = "position-select-list" })
                                     @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DepartmentId, "Отдел", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("DepartmentId", null, "Выберите отдел...", htmlAttributes: new { @class = "list", @id = "testselectset", @required = "required" })
+                                    @Html.DropDownListFor(model => model.DepartmentId, null, "Выберите отдел...", htmlAttributes: new { @class = "list", @id = "department-select-list" })
                                     @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger validation-span" })
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="file" name="productImg" id="imageBrowes" class="btn btn-default" style="display:inline-block;" accept="image/x-png,image/gif,image/jpeg"/>
+                                        <input type="file" name="image" id="imageBrowes" class="btn btn-default" style="display:inline-block;" accept="image/x-png,image/gif,image/jpeg"/>
                                         <input type="button" value="Сброс" id="imageBrowes" onclick="ClearPreview()" class="btn btn-default" />
                                         @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
                                     </div>
@@ -145,6 +145,7 @@
 </div>
 @section Scripts {
     <script type="text/javascript" charset="utf-8">
+        shortSelectOptions();
         checkPhotoPreview();
     </script>    
 }
