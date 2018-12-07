@@ -10,5 +10,6 @@ namespace Catalogue_re.BLL.Interfaces
     {
         Task<OperationDetails> Create(UserDTO userDTO);
         Task<ClaimsIdentity> Authenticate(UserDTO userDTO);
+        Task<OperationDetails> ChangePassword(ChangePasswordDTO changePasswordDTO);
     }
 }

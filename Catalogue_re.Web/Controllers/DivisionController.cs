@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace Catalogue_re.Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DivisionController : Controller
     {
         private const int ItemsPerPage = 10;

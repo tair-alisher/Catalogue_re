@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace Catalogue_re.Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdministrationController : Controller
     {
         private const int ItemsPerPage = 10;
@@ -24,7 +25,7 @@ namespace Catalogue_re.Web.Controllers
             AdministrationService = admService;
             DivisionService = divService;
         }
-
+        
         public ActionResult AjaxPositionList(int? page)
         {
             var administrationDTOList = AdministrationService.GetAllOrderedByNameWithRelations().ToList();
@@ -32,7 +33,7 @@ namespace Catalogue_re.Web.Controllers
 
             return PartialView(administrationVMList.ToPagedList(page ?? 1, ItemsPerPage));
         }
-
+        
         public ActionResult Index()
         {
             var administrationDTOList = AdministrationService.GetAllOrderedByNameWithRelations().ToList();
@@ -40,7 +41,7 @@ namespace Catalogue_re.Web.Controllers
 
             return View(administrationVMList.ToPagedList(1, ItemsPerPage));
         }
-
+        
         public ActionResult Details(int? id)
         {
             try
@@ -64,13 +65,14 @@ namespace Catalogue_re.Web.Controllers
                 });
             }
         }
-
+        
         public ActionResult Create()
         {
             ViewBag.DivisionId = GetDivisionIdSelectList();
             return View();
         }
 
+        
         private SelectList GetDivisionIdSelectList(int? selectedId = null)
         {
             return new SelectList(DivisionService.GetAllOrderedByName().ToList(), "Id", "Name", selectedId);

@@ -14,18 +14,18 @@ namespace Catalogue_re.DAL.Identity
             _userManager = manager;
         }
 
-        public override async Task<IdentityResult> ValidateAsync(ApplicationUser user)
-        {
-            IdentityResult result = await base.ValidateAsync(user);
-            var existingUser = await _userManager.FindByNameAsync(user.UserName);
-            if (existingUser != null)
-            {
-                var errors = result.Errors.ToList();
-                errors.Add("Пользователь с таким логином уже существует.");
-                result = new IdentityResult(errors);
-            }
+        //public override async Task<IdentityResult> ValidateAsync(ApplicationUser user)
+        //{
+        //    IdentityResult result = await base.ValidateAsync(user);
+        //    var existingUser = await _userManager.FindByNameAsync(user.UserName);
+        //    if (existingUser != null)
+        //    {
+        //        var errors = result.Errors.ToList();
+        //        errors.Add("Пользователь с таким логином уже существует.");
+        //        result = new IdentityResult(errors);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

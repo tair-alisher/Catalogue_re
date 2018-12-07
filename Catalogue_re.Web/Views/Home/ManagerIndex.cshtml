@@ -85,7 +85,7 @@
                                     <td class="td-title">(@Html.DisplayFor(model => item.Department.Administration.Code)) @Html.DisplayFor(model => item.Phone)</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("EmployeeDetails","Search", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                                            <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("EmployeeDetails","Home", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
                                         </div>
                                     </td>
                                 </tr>

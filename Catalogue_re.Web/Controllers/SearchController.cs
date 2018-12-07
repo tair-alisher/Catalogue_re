@@ -52,6 +52,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult DivisionFilter(string value)
         {
             var divisionDTOList = SearchService.GetFilteredDivisionList(value).ToList();
@@ -62,6 +63,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult AdministrationFilter(string value)
         {
             var administrationDTOList = SearchService.GetFilteredAdministrationList(value).ToList();
@@ -72,6 +74,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult DepartmentFilter(string value)
         {
             var departmentDTOList = SearchService.GetFilteredDepartmentList(value).ToList();
@@ -82,6 +85,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult PositionFilter(string value)
         {
             var positionDTOList = SearchService.GetFilteredPositionList(value).ToList();

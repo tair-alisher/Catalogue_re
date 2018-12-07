@@ -14,6 +14,7 @@ using System.Web.Mvc;
 
 namespace Catalogue_re.Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class EmployeeController : BaseController
     {
         private const int ItemsPerPage = 10;

@@ -50,7 +50,7 @@ namespace Catalogue_re.BLL.Services
                 throw new ArgumentNullException();
 
             var employee = _unitOfWork.Employees.GetAll().Where(e => e.Id == id)
-                .Include(e => e.Department).Include(e => e.Position).FirstOrDefault();
+                .Include(e => e.Department).Include(e => e.Department.Administration).Include(e => e.Position).FirstOrDefault();
             if (employee == null)
                 throw new NotFoundException();
 

@@ -2,6 +2,21 @@
     $('[data-toggle="tooltip"]').tooltip();
 });
 
+function shortSelectOptions() {
+    $('#department-select-list option').each(function () {
+        var option = $(this).text();
+        if (option.length > 55) {
+            $(this).text(option.substring(0, 55) + '...');
+        }
+    });
+    $("#position-select-list option").each(function () {
+        var option = $(this).text();
+        if (option.length > 55) {
+            $(this).text(option.substring(0, 55) + '...');
+        }
+    });
+}
+
 function hideAccordion() {
     $("#accordion").hide();
 }

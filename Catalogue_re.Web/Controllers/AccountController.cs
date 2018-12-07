@@ -2,11 +2,9 @@
 using Catalogue_re.BLL.Infrastructure;
 using Catalogue_re.BLL.Interfaces;
 using Catalogue_re.Web.Models.Account;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Catalogue_re.Web.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private IUserService UserService
@@ -40,6 +39,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -61,15 +61,14 @@ namespace Catalogue_re.Web.Controllers
 
             return View(model);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Register()
         {
             return View();
@@ -77,6 +76,7 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -98,6 +98,7 @@ namespace Catalogue_re.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult ChangePassword()
         {
             return View();
@@ -105,9 +106,29 @@ namespace Catalogue_re.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "manager, admin")]
         public async Task<ActionResult> ChangePassword(ChangePasswordModel model)
         {
+            if (ModelState.IsValid)
+            {
+                ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO
+                {
+                    UserId = User.Identity.GetUserId(),
+                    OldPassword = model.OldPassword,
+                    NewPassword = model.NewPassword
+                };
+                OperationDetails result = await UserService.ChangePassword(changePasswordDTO);
+                if (result.Success)
+                    return RedirectToRoute(new
+                    {
+                        controller = "Home",
+                        action = "Index"
+                    });
+                else
+                    ModelState.AddModelError(result.Property, result.Message);
+            }
 
+            return View(model);
         }
     }
 }

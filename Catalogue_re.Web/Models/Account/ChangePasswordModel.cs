@@ -15,5 +15,11 @@ namespace Catalogue_re.Web.Models.Account
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
         public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword")]
+        [Display(Name = "Подтвердите пароль")]
+        public string ConfirmPassword { get; set; }
     }
 }

@@ -37,19 +37,19 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label class="control-label" for="administration-select-list">Выберите орган управления (опционально)</label>
-                                @Html.DropDownList("AdministrationId", null, "Орган управления", htmlAttributes: new { @class = "form-control", id = "administration-select-list" })
+                                @Html.DropDownList("AdministrationId", null, "Орган управления", htmlAttributes: new { @class = "form-control select-list", id = "administration-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="division-select-list">Выберите регион (опционально)</label>
-                                @Html.DropDownList("DivisionId", null, "Регион", htmlAttributes: new { @class = "form-control", id = "division-select-list" })
+                                @Html.DropDownList("DivisionId", null, "Регион", htmlAttributes: new { @class = "form-control select-list", id = "division-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="department-select-list">Выберите отдел (опционально)</label>
-                                @Html.DropDownList("DepartmentId", null, "Отдел", htmlAttributes: new { @class = "form-control", id = "department-select-list" })
+                                @Html.DropDownList("DepartmentId", null, "Отдел", htmlAttributes: new { @class = "form-control select-list", id = "department-select-list" })
                             </div>
                             <div class="col-md-3">
                                 <label class="control-label" for="position-select-list">Выберите должность (опционально)</label>
-                                @Html.DropDownList("PositionId", null, "Должность", htmlAttributes: new { @class = "form-control", id = "position-select-list" })
+                                @Html.DropDownList("PositionId", null, "Должность", htmlAttributes: new { @class = "form-control select-list", id = "position-select-list" })
                             </div>
                         </div>
                     </div>
@@ -96,6 +96,7 @@
 @section Scripts {
     <script src="@Url.Content("~/Scripts/pagination.js")"></script>
     <script>
+        shortSelectOptions();
         pagination();
     </script>
 }
