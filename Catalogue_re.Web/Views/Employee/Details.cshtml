@@ -1,0 +1,101 @@
+﻿@model Catalogue_re.Web.Models.ViewModels.EmployeeVM
+
+@{
+    ViewBag.Title = "Просмотр сотрудника";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Просмотр сотрудника</h2>
+                </div>
+                <div class="content">
+                    <div>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Photo)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                <img src="~/images/@Model.Photo" width="100" height="100" />
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Department.Name)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Department.Name)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Position.Name)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Position.Name)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.FullName)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.FullName)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Room)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Room)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Address)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Address)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Phone)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.PersonalPhone)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.PersonalPhone)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.Skype)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.Skype)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.DateAdoption)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.DateAdoption)
+                            </dd>
+                            <dt style="width: 200px;">
+                                @Html.DisplayNameFor(model => model.DateDismissal)
+                            </dt>
+                            <dd style="margin-left: 15%;">
+                                @Html.DisplayFor(model => model.DateDismissal)
+                            </dd>                          
+                        </dl>
+                    </div>
+                    <p>
+                        <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = Model.Id})">Редактировать</a> |
+                        <a class="btn btn-default" name="backButton" id="backButton" href="@Url.Action("Index","Employee")">Назад</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

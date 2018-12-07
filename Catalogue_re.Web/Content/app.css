@@ -1,0 +1,26 @@
+html {
+    overflow-y: scroll;
+}
+
+.col-item {
+    display: block;
+    padding: 2px 0 2px 20px;
+    border-bottom: 1px solid #efefef;
+}
+
+#title {
+    padding-left: 20px;
+}
+
+.ajax-form {
+    width: 100%;
+}
+.employee-list{
+    margin-left: 2%;
+}
+
+.tumb {
+    width: 100px !important;
+    height: 100px;
+    cursor: pointer;
+}

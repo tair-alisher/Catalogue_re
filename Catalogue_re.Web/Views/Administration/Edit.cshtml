@@ -1,0 +1,102 @@
+﻿@model Catalogue_re.Web.Models.ViewModels.AdministrationVM
+
+@{
+    ViewBag.Title = "Редактирование органа управления";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Редактирование административного органа управления</h2>
+                </div>
+                <div class="content">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            <!-- Field ComboBox DivisionId with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Id, "Административное деление", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("DivisionId", null, "Выберите административное деление...", htmlAttributes: new { @class = "form-control", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field ComboBox AdministrationName with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field AdministrationPost with Validation -->                  
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Post, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Post, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Post, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field AdministrationAddress with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field AdministrationFax with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field AdministrationEMail with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field AdministrationSkype with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Skype, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Skype, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Skype, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- Field AdministrationCode with Validation -->
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                </div>
+                            </div>                          
+                            <!-- Buttons Save and Clear -->
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Сохранить" class="btn btn-default" /> |
+                                    <a class="btn btn-default" name="backButton" id="backButton" href="@Url.Action("Index","Administration")">Назад</a>
+                                </div>
+                            </div>
+                        </div>
+                    }       
+                    @Scripts.Render("~/bundles/jquery")
+                    @Scripts.Render("~/bundles/jqueryval")         
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

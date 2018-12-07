@@ -1,0 +1,95 @@
+﻿@model PagedList<Catalogue_re.Web.Models.ViewModels.EmployeeVM>
+@using PagedList;
+@using PagedList.Mvc;
+
+<table class="table table-striped" id="listTable">
+    <tr>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Photo)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.First().Department.Name)
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Position.Name)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.First().FullName)
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Room)
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Phone)
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().DateAdoption)
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().DateDismissal)
+        </th>
+        <th style="text-align: center;">
+            Действия
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    var myModal = "myModal" + item.Id;
+    <tr>
+        <td>
+            <img src="~/images/@item.Photo" width="80" height="100" />
+        </td>
+        <td class="td-title">
+            @Html.DisplayFor(modelItem => item.Department.Name)
+        </td>
+        <td class="td-title">
+            @Html.DisplayFor(modelItem => item.Position.Name)
+        </td>
+        <td class="td-title">
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td class="td-title">
+            @Html.DisplayFor(modelItem => item.Room)
+        </td>
+        <td class="td-title">
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAdoption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDismissal)
+        </td>
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-default" name="editButton" id="editButton" href="@Url.Action("Edit","Employee", new {id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top"></i></a>
+                <a class="btn btn-default" name="detailsButton" id="detailsButton" href="@Url.Action("Details","Employee", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"></i></a>
+                <a class="btn btn-default" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Employee", new {id = item.Id})" data-toggle="modal" data-target="#@myModal"
+                   data-whatever="@item.Id"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"></i></a>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Удаление</h4>
+                        </div>
+                        <div class="modal-body">
+                            Вы точно хотите удалить: <span><b>@item.FullName</b></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <input type="submit" value="Удалить" class="btn btn-danger" id="btn1"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+}
+</table>
+<!-- Pagination -->
+@Html.PagedListPager(Model, page => Url.Action("AjaxPositionList", new { page }),
+         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "result"}))
+        Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
