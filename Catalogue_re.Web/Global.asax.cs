@@ -39,7 +39,7 @@ namespace Catalogue_re.Web
                 x.AllowNullCollections = true;
                 x.AddProfile<BLLMappingProfile>();
                 x.AddProfile<WebMappingProfile>();
-            }); ;
+            });
 
             Mapper.Configuration.AssertConfigurationIsValid();
         }
